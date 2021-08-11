@@ -6,7 +6,9 @@ function App() {
     return (
         <div className="App">
             <Router isLoggedIn={isLoggedIn}></Router>
-            <footer>&copy; Twitter {new Date().getFullYear()}</footer>
+            <footer className="bg-gray-300 p-5">
+                &copy; Twitter {new Date().getFullYear()}
+            </footer>
         </div>
     );
 }
