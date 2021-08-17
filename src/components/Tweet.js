@@ -1,4 +1,4 @@
-import { dbService } from "fbase";
+import { dbService, stroageService } from "fbase";
 import React, { useState } from "react";
 
 const Tweet = ({ tweetObj, isOwner }) => {
@@ -11,6 +11,7 @@ const Tweet = ({ tweetObj, isOwner }) => {
         if (ok) {
             await dbService.doc(`tweets/${tweetObj.id}`).delete();
             alert("completed delete");
+            await stroageService.refFromURL(tweetObj.attachmentUrl).delete();
         } else {
         }
     };
@@ -50,7 +51,13 @@ const Tweet = ({ tweetObj, isOwner }) => {
                     <button onClick={toggleEditing}>Cancel</button>
                 </>
             ) : (
-                <div className="flex flex-row justify-between">
+                <div className="flex flex-row justify-between align-items-center">
+                    {tweetObj.attachmentUrl && (
+                        <img
+                            style={{ width: "50px" }}
+                            src={tweetObj.attachmentUrl}
+                        ></img>
+                    )}
                     <h4>{tweetObj.text}</h4>
                     {isOwner ? (
                         <div className="fex flex-row align-items-center">
