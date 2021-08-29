@@ -35,9 +35,9 @@ const Home = ({ userObj }) => {
         e.preventDefault();
         let attachmentUrl = "";
         if (attachment !== "") {
-            const attachmentRef = stroageService.ref(
-                `${userObj.uid}/${uuidv4()}`
-            );
+            const attachmentRef = stroageService
+                .ref()
+                .child(`${userObj.uid}/${uuidv4()}`);
             const response = await attachmentRef.putString(
                 attachment,
                 "data_url"
